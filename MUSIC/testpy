@@ -1,0 +1,35 @@
+import numpy  as np
+import scipy
+import math
+from scipy import linalg
+import matplotlib
+from matplotlib import pyplot as plt
+import source as srs
+
+
+def summation(theta,S):
+
+    M = S.size
+    val = 0
+    for m in range(M):
+        val = val + math.sin(theta*S[m])**2 
+
+    return val
+
+N = 200
+
+S = np.load('samples.npy')
+print(S)
+
+
+L = 100 
+X_axis = np.zeros(L)
+Y_axis = np.zeros(L)
+
+for l in range(L):
+    theta = math.pi*(-1 + 2*(l+1)/L)
+    X_axis[l] = theta 
+    Y_axis[l] = summation(theta,S)
+
+plt.scatter(X_axis,Y_axis)
+plt.show()
